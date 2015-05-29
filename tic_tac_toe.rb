@@ -33,7 +33,7 @@ def empty?(play_state, space)
   empties.include?(space)
 end
 
-def block(play_state)
+def two_in_a_row(play_state)
   WINNING_COMBOS.each do |combo|
     if play_state[combo[0]] == 'X' &&
        play_state[combo[1]] == 'X' &&
@@ -53,8 +53,8 @@ def block(play_state)
 end
 
 def computers_turn(play_state)
-  if block(play_state) != false
-    computers_position = block(play_state)
+  if two_in_a_row(play_state) != false
+    computers_position = two_in_a_row(play_state)
   else
     empty_spaces = get_empty_spaces(play_state)
     computers_position = empty_spaces.keys.sample
@@ -75,7 +75,7 @@ def winner?(play_state, symbol)
   false
 end
 
-def game
+def play_one_game
   play_state = Hash[(1..9).collect { |num| [num, ' '] }]
   draw_board(play_state)
 
@@ -101,7 +101,7 @@ end
 
 loop do
   system 'clear'
-  game
+  play_one_game
   puts 'Try again? (y/n)'
   break if gets.chomp.downcase == 'n'
 end
