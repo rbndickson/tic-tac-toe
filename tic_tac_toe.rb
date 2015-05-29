@@ -1,9 +1,5 @@
-# psudo code
+# tic_tac_toe.rb
 
-# draw board
-# player 1 draws X
-# player 2 draws O
-# repeat until someone wins or there are no more spaces.
 require 'pry'
 
 WINNING_COMBOS = [
@@ -61,8 +57,6 @@ end
 def computers_turn(play_state)
   if block(play_state) != false
     computers_position = block(play_state)
-  elsif empty?(play_state, 5)
-    computers_position = 5
   else
     empty_spaces = get_empty_spaces(play_state)
     computers_position = empty_spaces.keys.sample
@@ -77,14 +71,14 @@ def winner?(play_state, symbol)
     if play_state[combo[0]] == symbol &&
        play_state[combo[1]] == symbol &&
        play_state[combo[2]] == symbol
-      return true                       # I thought I didn't need to say return
+      return true
     end
   end
   false
 end
 
 def game
-  play_state = Hash[(1..9).collect { |num| [num, ' '] }] # Don't fully underst.
+  play_state = Hash[(1..9).collect { |num| [num, ' '] }]
   draw_board(play_state)
 
   loop do
