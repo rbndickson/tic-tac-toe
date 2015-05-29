@@ -21,7 +21,7 @@ end
 def players_turn(play_state)
   puts 'Your turn, what position 1 - 9 would you like to go?'
   players_position = gets.chomp.to_i
-  until is_empty?(play_state, players_position) == true do
+  until empty?(play_state, players_position) == true do
     puts 'Place taken, choose a free space?'
     players_position = gets.chomp.to_i
   end
@@ -31,10 +31,10 @@ def players_turn(play_state)
 end
 
 def get_empty_spaces(play_state)
-  play_state.select { |k, v| v == ' ' }
+  play_state.select { |_k, v| v == ' ' }
 end
 
-def is_empty?(play_state, space)
+def empty?(play_state, space)
   empties = get_empty_spaces(play_state)
   empties.include?(space)
 end
@@ -55,13 +55,13 @@ def block(play_state)
       return combo[0]
     end
   end
-  return false
+  false
 end
 
 def computers_turn(play_state)
   if block(play_state) != false
     computers_position = block(play_state)
-  elsif is_empty?(play_state, 5)
+  elsif empty?(play_state, 5)
     computers_position = 5
   else
     empty_spaces = get_empty_spaces(play_state)
@@ -80,17 +80,17 @@ def winner?(play_state, symbol)
       return true                       # I thought I didn't need to say return
     end
   end
-  return false
+  false
 end
 
 def game
-  play_state = Hash[(1..9).collect { |num| [num, ' '] }] # Don't fully understand
+  play_state = Hash[(1..9).collect { |num| [num, ' '] }] # Don't fully underst.
   draw_board(play_state)
 
   loop do
     players_turn(play_state)
     if winner?(play_state, 'X') == true
-      puts "Player won!"
+      puts 'Player won!'
       break
     end
 
