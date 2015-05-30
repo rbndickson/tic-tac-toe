@@ -4,18 +4,21 @@ WINNING_COMBOS = [
   [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
   [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
-def draw_board(play_s)
-  puts " #{play_s[1]} | #{play_s[2]} | #{play_s[3]}          1 | 2 | 3 "
+def draw_board(play_state)
+  puts " #{play_state[1]} | #{play_state[2]} | #{play_state[3]}"\
+       "          1 | 2 | 3 "
   puts '---|---|---        ---|---|---'
-  puts " #{play_s[4]} | #{play_s[5]} | #{play_s[6]}          4 | 5 | 6 "
+  puts " #{play_state[4]} | #{play_state[5]} | #{play_state[6]}"\
+       "          4 | 5 | 6 "
   puts '---|---|---        ---|---|---'
-  puts " #{play_s[7]} | #{play_s[8]} | #{play_s[9]}          7 | 8 | 9 \n "
+  puts " #{play_state[7]} | #{play_state[8]} | #{play_state[9]}"\
+       "          7 | 8 | 9 \n "
 end
 
 def players_turn(play_state)
   puts 'Your turn, what position 1 - 9 would you like to go?'
   players_position = gets.chomp.to_i
-  until empty?(play_state, players_position) == true
+  until empty?(play_state, players_position)
     puts 'Place taken, choose a free space?'
     players_position = gets.chomp.to_i
   end
@@ -81,13 +84,13 @@ def play_one_game
 
   loop do
     players_turn(play_state)
-    if winner?(play_state, 'X') == true
+    if winner?(play_state, 'X')
       puts 'You won!'
       break
     end
 
     computers_turn(play_state)
-    if winner?(play_state, 'O') == true
+    if winner?(play_state, 'O')
       puts 'Computer won!'
       break
     end
